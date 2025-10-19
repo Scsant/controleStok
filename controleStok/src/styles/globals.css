@@ -51,11 +51,12 @@
 
 /* Chart and tooltip theme variables (used by Recharts via inline styles) */
 :root {
-  --chart-tooltip-bg: rgba(255,255,255,0.95);
-  --chart-tooltip-color: #111;
-  --chart-tooltip-border: rgba(0,0,0,0.08);
-  --chart-tooltip-boxshadow: 0 6px 18px rgba(0,0,0,0.08);
-  --chart-label-color: #111;
+  /* Default to a dark semi-transparent tooltip card for better contrast over gradients */
+  --chart-tooltip-bg: rgba(0,0,0,0.8);
+  --chart-tooltip-color: #fff;
+  --chart-tooltip-border: rgba(255,255,255,0.12);
+  --chart-tooltip-boxshadow: 0 6px 18px rgba(0,0,0,0.12);
+  --chart-label-color: #fff;
 }
 
 .dark {

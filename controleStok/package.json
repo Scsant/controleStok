@@ -50,10 +50,10 @@
           "vaul": "^1.1.2",
           "vite": "6.3.5"
       },
-      "devDependencies": {
-          "@types_node": "^20.10.0",
-          "@vitejs/plugin-react-swc": "^3.10.2"
-      },
+    "devDependencies": {
+        "@types/node": "^20.10.0",
+        "@vitejs/plugin-react-swc": "^3.10.2"
+    },
       "scripts": {
           "dev": "vite",
           "build": "vite build"
