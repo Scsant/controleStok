@@ -361,7 +361,7 @@ export function DashboardGraficos() {
                     const entry = fornecedorData[index];
                     return (
                       // eslint-disable-next-line react/no-unknown-property
-                      <text x={x} y={y} fill="#fff" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
+                      <text x={x} y={y} fill={"var(--chart-label-color)"} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
                         {`${entry.nome} ${(percent * 100).toFixed(0)}%`}
                       </text>
                     );
@@ -377,11 +377,11 @@ export function DashboardGraficos() {
                 </Pie>
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'rgba(255,255,255,0.95)',
-                    border: '1px solid rgba(0,0,0,0.08)',
+                    backgroundColor: 'var(--chart-tooltip-bg)',
+                    border: '1px solid var(--chart-tooltip-border)',
                     borderRadius: '0.5rem',
-                    color: '#111',
-                    boxShadow: '0 6px 18px rgba(0,0,0,0.08)'
+                    color: 'var(--chart-tooltip-color)',
+                    boxShadow: 'var(--chart-tooltip-boxshadow)'
                   }}
                   formatter={(value: number) => formatCurrency(value)}
                 />
@@ -475,7 +475,7 @@ export function DashboardGraficos() {
                   if (percent <= 0.03) return null;
                   const entry = statusData[index];
                   return (
-                    <text x={x} y={y} fill="#fff" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
+                    <text x={x} y={y} fill={"var(--chart-label-color)"} textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central" fontSize={12}>
                       {`${entry.status} ${(percent * 100).toFixed(0)}%`}
                     </text>
                   );
@@ -491,11 +491,11 @@ export function DashboardGraficos() {
               </Pie>
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: 'rgba(255,255,255,0.95)',
-                  border: '1px solid rgba(0,0,0,0.08)',
+                  backgroundColor: 'var(--chart-tooltip-bg)',
+                  border: '1px solid var(--chart-tooltip-border)',
                   borderRadius: '0.5rem',
-                  color: '#111',
-                  boxShadow: '0 6px 18px rgba(0,0,0,0.08)'
+                  color: 'var(--chart-tooltip-color)',
+                  boxShadow: 'var(--chart-tooltip-boxshadow)'
                 }}
               />
             </PieChart>

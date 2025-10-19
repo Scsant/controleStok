@@ -49,6 +49,31 @@
   }
 }
 
+/* Chart and tooltip theme variables (used by Recharts via inline styles) */
+:root {
+  --chart-tooltip-bg: rgba(255,255,255,0.95);
+  --chart-tooltip-color: #111;
+  --chart-tooltip-border: rgba(0,0,0,0.08);
+  --chart-tooltip-boxshadow: 0 6px 18px rgba(0,0,0,0.08);
+  --chart-label-color: #111;
+}
+
+.dark {
+  --chart-tooltip-bg: rgba(0,0,0,0.8);
+  --chart-tooltip-color: #fff;
+  --chart-tooltip-border: rgba(255,255,255,0.12);
+  --chart-tooltip-boxshadow: 0 6px 18px rgba(0,0,0,0.12);
+  --chart-label-color: #fff;
+}
+
+.high-contrast {
+  --chart-tooltip-bg: #fff;
+  --chart-tooltip-color: #000;
+  --chart-tooltip-border: rgba(0,0,0,0.12);
+  --chart-tooltip-boxshadow: 0 8px 24px rgba(0,0,0,0.18);
+  --chart-label-color: #000;
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
