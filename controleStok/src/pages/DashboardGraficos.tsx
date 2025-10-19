@@ -217,6 +217,33 @@ export function DashboardGraficos() {
     return name.length > 28 ? `${name.slice(0, 25)}...` : name;
   };
 
+  // Custom Pie tooltip: keep style identical to other chart tooltips but render pie label/value clearly.
+  function PieTooltipContent({ active, payload, label }: any) {
+    if (!active || !payload || !payload.length) return null;
+    const item = payload[0];
+    const data = item?.payload || {};
+    const title = data.nome || data.name || data.status || data.label || item.name || label || '';
+    const rawValue = item?.value ?? item?.payload?.value ?? 0;
+
+    const isCurrency = Object.prototype.hasOwnProperty.call(data, 'valor') || /valor/i.test(String(item.name || ''));
+    const valueDisplay = isCurrency ? formatCurrency(Number(rawValue || 0)) : String(rawValue || 0);
+
+    return (
+      <div style={{
+        backgroundColor: 'rgba(0,0,0,0.85)',
+        color: '#fff',
+        borderRadius: 8,
+        padding: '8px 12px',
+        minWidth: 120,
+        boxShadow: '0 6px 18px rgba(0,0,0,0.12)',
+        border: '1px solid rgba(255,255,255,0.12)'
+      }}>
+        <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 6 }}>{title}</div>
+        <div style={{ fontSize: 13 }}>{valueDisplay}</div>
+      </div>
+    );
+  }
+
   if (loading) {
     return (
       <div className="space-y-6">
@@ -259,24 +286,8 @@ export function DashboardGraficos() {
                   stroke="rgba(255,255,255,0.6)"
                   tick={{ fill: 'rgba(255,255,255,0.8)' }}
                 />
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'var(--chart-tooltip-bg)',
-                    border: '1px solid var(--chart-tooltip-border)',
-                    borderRadius: '0.5rem',
-                    color: 'var(--chart-tooltip-color)',
-                    boxShadow: 'var(--chart-tooltip-boxshadow)'
-                  }}
-                />
-                <Legend wrapperStyle={{ color: '#fff' }} />
-                <Line 
-                  type="monotone" 
-                  dataKey="total" 
-                  stroke="#10b981" 
-                  strokeWidth={2}
-                  name="Recebimentos"
-                  dot={{ fill: '#10b981', r: 4 }}
-                />
+                <Tooltip contentStyle={{ backgroundColor: 'rgba(0,0,0,0.85)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '0.5rem', color: '#fff', boxShadow: '0 6px 18px rgba(0,0,0,0.12)' }} />
+                <Line type="monotone" dataKey="total" stroke="#10b981" strokeWidth={2} name="Recebimentos" dot={{ fill: '#10b981', r: 4 }} />
                 <Line 
                   type="monotone" 
                   dataKey="retiradas" 
@@ -314,11 +325,10 @@ export function DashboardGraficos() {
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'var(--chart-tooltip-bg)',
-                    border: '1px solid var(--chart-tooltip-border)',
+                    backgroundColor: 'rgba(0,0,0,0.8)', 
+                    border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '0.5rem',
-                    color: 'var(--chart-tooltip-color)',
-                    boxShadow: 'var(--chart-tooltip-boxshadow)'
+                    color: '#fff'
                   }}
                   formatter={(value: number) => formatCurrency(value)}
                 />
@@ -350,14 +360,12 @@ export function DashboardGraficos() {
                   cx="50%"
                   cy="50%"
                   labelLine={true}
-                  label={(props) => {
-                    // custom label renderer: place label outside and show percent when relevant
+                  label={(props: any) => {
                     const { cx, cy, midAngle, innerRadius, outerRadius, percent, index } = props as any;
                     const RADIAN = Math.PI / 180;
                     const radius = innerRadius + (outerRadius - innerRadius) * 1.2;
                     const x = cx + radius * Math.cos(-midAngle * RADIAN);
                     const y = cy + radius * Math.sin(-midAngle * RADIAN);
-                    // hide labels for very small slices
                     if (percent <= 0.03) return null;
                     const entry = fornecedorData[index];
                     return (
@@ -376,16 +384,7 @@ export function DashboardGraficos() {
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
-                <Tooltip 
-                  contentStyle={{ 
-                    backgroundColor: 'var(--chart-tooltip-bg)',
-                    border: '1px solid var(--chart-tooltip-border)',
-                    borderRadius: '0.5rem',
-                    color: 'var(--chart-tooltip-color)',
-                    boxShadow: 'var(--chart-tooltip-boxshadow)'
-                  }}
-                  formatter={(value: number) => formatCurrency(value)}
-                />
+                <Tooltip content={<PieTooltipContent />} formatter={(value: number) => formatCurrency(value)} />
               </PieChart>
             </ResponsiveContainer>
 
@@ -490,15 +489,7 @@ export function DashboardGraficos() {
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: 'var(--chart-tooltip-bg)',
-                  border: '1px solid var(--chart-tooltip-border)',
-                  borderRadius: '0.5rem',
-                  color: 'var(--chart-tooltip-color)',
-                  boxShadow: 'var(--chart-tooltip-boxshadow)'
-                }}
-              />
+              <Tooltip content={<PieTooltipContent />} />
             </PieChart>
           </ResponsiveContainer>
         </CardContent>
