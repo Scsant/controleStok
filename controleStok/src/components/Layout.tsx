@@ -3,7 +3,7 @@ import { LogOut, Menu, Package, BarChart3, FileText, LayoutDashboard, X, Package
 import { Button } from './ui/button';
 import { useAuth } from '../contexts/AuthContext';
 import { motion, AnimatePresence } from 'motion/react';
-import bracellLogo from 'figma:asset/27c1ea150cdda0370734f0ab0ddb1efbe880832f.png';
+import bracellLogo from '../assets/bracell_logo-2020.png';
 
 interface LayoutProps {
   children: ReactNode;
@@ -150,7 +150,7 @@ export function Layout({ children, currentPage, onNavigate }: LayoutProps) {
 
         {/* Main Content */}
         <main className="flex-1 p-6 min-w-0">
-          {children}
+          <div className="max-w-7xl mx-auto w-full">{children}</div>
         </main>
       </div>
     </div>
