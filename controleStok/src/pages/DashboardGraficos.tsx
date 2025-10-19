@@ -261,10 +261,11 @@ export function DashboardGraficos() {
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'rgba(0,0,0,0.8)', 
-                    border: '1px solid rgba(255,255,255,0.2)',
+                    backgroundColor: 'var(--chart-tooltip-bg)',
+                    border: '1px solid var(--chart-tooltip-border)',
                     borderRadius: '0.5rem',
-                    color: '#fff'
+                    color: 'var(--chart-tooltip-color)',
+                    boxShadow: 'var(--chart-tooltip-boxshadow)'
                   }}
                 />
                 <Legend wrapperStyle={{ color: '#fff' }} />
@@ -313,11 +314,11 @@ export function DashboardGraficos() {
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'rgba(255,255,255,0.95)',
-                    border: '1px solid rgba(0,0,0,0.08)',
+                    backgroundColor: 'var(--chart-tooltip-bg)',
+                    border: '1px solid var(--chart-tooltip-border)',
                     borderRadius: '0.5rem',
-                    color: '#111',
-                    boxShadow: '0 6px 18px rgba(0,0,0,0.08)'
+                    color: 'var(--chart-tooltip-color)',
+                    boxShadow: 'var(--chart-tooltip-boxshadow)'
                   }}
                   formatter={(value: number) => formatCurrency(value)}
                 />
